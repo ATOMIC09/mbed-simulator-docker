@@ -1,4 +1,4 @@
-> This repo is a fork from [alpsayin/mbed-simulator](https://github.com/alpsayin/mbed-simulator), some configurations modified foor it to work in 2024.
+> This repo is a fork from [alpsayin/mbed-simulator](https://github.com/alpsayin/mbed-simulator), some configurations were modified for it to work in 2024.
 > 
 > Run directly from pulled docker image:
 > `docker run -dp7829:7829 -it noahwu/mbed-simul`
