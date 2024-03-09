@@ -1,16 +1,18 @@
 
 FROM node:16-slim
 
-ENV PATH="${PATH}:/emsdk:/emsdk/fastcomp-clang/e1.38.21_64bit:/emsdk/emscripten/1.38.21"
+ENV EMSCRIPTEN_VERSION "1.38.30"
+
+ENV PATH="${PATH}:/emsdk:/emsdk/fastcomp-clang/tag-e${EMSCRIPTEN_VERSION}:/emsdk/emscripten/tag-${EMSCRIPTEN_VERSION}"
 ENV EMSDK="/emsdk"
 ENV EM_CONFIG="/emsdk/.emscripten"
-ENV EMSCRIPTEN="/emsdk/emscripten/1.38.21"
-ENV EMSCRIPTEN_NATIVE_OPTIMIZER="/emsdk/fastcomp-clang/e1.38.21_64bit/optimizer"
-ENV LLVM_ROOT="/emsdk/fastcomp-clang/e1.38.21_64bit"
-ENV BINARYEN_ROOT="/emsdk/fastcomp-clang/e1.38.21_64bit/binaryen"
+ENV EMSCRIPTEN="/emsdk/emscripten/tag-${EMSCRIPTEN_VERSION}"
+ENV EMSCRIPTEN_NATIVE_OPTIMIZER="/emsdk/emscripten/tag-${EMSCRIPTEN_VERSION}_64bit_optimizer/optimizer"
+ENV LLVM_ROOT="/emsdk/fastcomp-clang/tag-e${EMSCRIPTEN_VERSION}"
+ENV BINARYEN_ROOT="/emsdk/fastcomp-clang/tag-e${EMSCRIPTEN_VERSION}/binaryen"
 ENV EMSDK_NODE="/usr/bin/node"
 ENV EMCC_WASM_BACKEND="0"
-ENV EM_CACHE="/emsdk/emscripten/1.38.21/cache"
+ENV EM_CACHE="/emsdk/emscripten/tag-${EMSCRIPTEN_VERSION}/cache"
 
 RUN apt-get update -qq && \
     apt-get -qqy install \
@@ -24,10 +26,11 @@ RUN cd emsdk && git reset --hard 0b2084f
 RUN ln -s /emsdk /usr/lib/emsdk
 RUN npm update -g
 
-RUN emsdk/emsdk install fastcomp-clang-tag-e1.38.21-64bit && \
-    emsdk/emsdk activate fastcomp-clang-tag-e1.38.21-64bit && \
-    emsdk/emsdk install emscripten-1.38.30  && \
-    emsdk/emsdk activate emscripten-1.38.30 
+RUN emsdk/emsdk list
+RUN emsdk/emsdk install fastcomp-clang-tag-e${EMSCRIPTEN_VERSION}-64bit && \
+    emsdk/emsdk activate fastcomp-clang-tag-e${EMSCRIPTEN_VERSION}-64bit && \
+    emsdk/emsdk install emscripten-tag-${EMSCRIPTEN_VERSION}-64bit  && \
+    emsdk/emsdk activate emscripten-tag-${EMSCRIPTEN_VERSION}-64bit 
 
 ADD . /mbed-simulator
 
