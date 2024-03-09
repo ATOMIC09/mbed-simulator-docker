@@ -19,14 +19,15 @@ RUN apt-get update -qq && \
 RUN python3 -m pip install mbed-cli mercurial
 
 RUN git clone https://github.com/emscripten-core/emsdk
+RUN cd emsdk && git reset --hard 0b2084f 
 
 RUN ln -s /emsdk /usr/lib/emsdk
 RUN npm update -g
 
-RUN emsdk/emsdk install fastcomp-clang-e1.38.21-64bit && \
-    emsdk/emsdk activate fastcomp-clang-e1.38.21-64bit && \
-    emsdk/emsdk install emscripten-1.38.21 && \
-    emsdk/emsdk activate emscripten-1.38.21
+RUN emsdk/emsdk install fastcomp-clang-tag-e1.38.21-64bit && \
+    emsdk/emsdk activate fastcomp-clang-tag-e1.38.21-64bit && \
+    emsdk/emsdk install emscripten-1.38.30  && \
+    emsdk/emsdk activate emscripten-1.38.30 
 
 ADD . /mbed-simulator
 
