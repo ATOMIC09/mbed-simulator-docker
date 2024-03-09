@@ -1,3 +1,6 @@
+> This repo is a fork from [alpsayin/mbed-simulator](https://github.com/alpsayin/mbed-simulator), some configurations modified foor it to work in 2024.
+> Run from pulled docker image:
+> `docker run -dp7829:7829 -it noahwu/mbed-simul`
 # Modded fork of the experimental simulator for Mbed OS 5.10 applications
 
 ### Motivation
