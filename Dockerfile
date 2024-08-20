@@ -27,10 +27,10 @@ RUN ln -s /emsdk /usr/lib/emsdk
 RUN npm update -g
 
 RUN emsdk/emsdk list
-RUN emsdk/emsdk install fastcomp-clang-tag-e${EMSCRIPTEN_VERSION}-64bit && \
+RUN emsdk/emsdk install sdk-fastcomp-tag-${EMSCRIPTEN_VERSION}-64bit && \
+    emsdk/emsdk install emscripten-${EMSCRIPTEN_VERSION}  && \
     emsdk/emsdk activate fastcomp-clang-tag-e${EMSCRIPTEN_VERSION}-64bit && \
-    emsdk/emsdk install emscripten-tag-${EMSCRIPTEN_VERSION}-64bit  && \
-    emsdk/emsdk activate emscripten-tag-${EMSCRIPTEN_VERSION}-64bit 
+    emsdk/emsdk activate emscripten-${EMSCRIPTEN_VERSION} 
 
 ADD . /mbed-simulator
 
